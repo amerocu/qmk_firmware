@@ -29,7 +29,7 @@ enum layers {
 #define SYM      MO(_SYM)
 #define NAV      MO(_NAV)
 #define FKEYS    TG(_FUNCTION)
-#define ADJUST   MO(_ADJUST)
+#define ADJUST   TG(_ADJUST)
 
 #define SYM_BSP  LT(_SYM, KC_BSPC)
 #define NAV_DEL  LT(_NAV, KC_DEL)
