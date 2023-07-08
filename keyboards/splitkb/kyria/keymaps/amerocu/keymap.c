@@ -34,18 +34,17 @@ enum layers {
 #define SYM_BSP  LT(_SYM, KC_BSPC)
 #define NAV_DEL  LT(_NAV, KC_DEL)
 
-#define CTL_ESC  MT(MOD_LCTL, KC_ESC)
-#define CTL_QUOT MT(MOD_RCTL, KC_QUOTE)
-#define CTL_MINS MT(MOD_RCTL, KC_MINUS)
 #define LALT_ENT MT(MOD_LALT, KC_ENT)
 #define RALT_ENT MT(MOD_RALT, KC_ENT)
+#define ALT_S    MT(MOD_LALT, KC_S)
+#define ALT_L    MT(MOD_RALT, KC_L)
 
-
-#define CTL_A    MT(MOD_LCTL, KC_A)
-#define CTL_CL   MT(MOD_LCTL, KC_SCLN)
+#define CTL_D    MT(MOD_LCTL, KC_D)
+#define CTL_K    MT(MOD_LCTL, KC_K)
 #define CTL_SPC  MT(MOD_LCTL, KC_SPC)
-#define SFT_Z    MT(MOD_RSFT, KC_Z)
-#define SFT_SL   MT(MOD_RSFT, KC_SLSH)
+
+#define SFT_F    MT(MOD_LSFT, KC_F)
+#define SFT_J    MT(MOD_RSFT, KC_J)
 #define SFT_SPC  MT(MOD_RSFT, KC_SPC)
 
 // Note: LAlt/Enter (ALT_ENT) is not the same thing as the keyboard shortcut Alt+Enter.
@@ -60,18 +59,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-------------------------------------------.                              ,-------------------------------------------.
  * |  Tab   |   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * | Esc    |Ctrl/A|   S  |   D  |   F  |   G  |                              |   H  |   J  |   K  |   L  |C ; : |  '  "  |
+ * | Esc    |   A  |Alt/S |Ctlr/D|Shif/F|   G  |                              |   H  |Shif/J|Ctlr/K|Alt/L | ; :  |  '  "  |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |Sft/Z |   X  |   C  |   V  |   B  |CapsLk|      |  |F-keys|      |   N  |   M  | ,  < | . >  |Sft /?|        |
+ * |        |   Z  |   X  |   C  |   V  |   B  |CapsLk| ADJ  |  |F-keys|      |   N  |   M  | ,  < | . >  | / ?  |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |      | LGUI | LAlt/| Enter| Canc |  | Bksp | Space| LAlt/| RGUI |      |
+ *                        |      | LGUI | LAlt/| Space| Canc |  | Bksp | Space| LAlt/| RGUI |      |
  *                        |      |      | Enter| Shift| Nav  |  | Sym  | Ctrl | Enter|      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_QWERTY] = LAYOUT(
      KC_TAB  , KC_Q  ,  KC_W   ,  KC_E  ,   KC_R ,   KC_T ,                                        KC_Y,   KC_U ,  KC_I ,   KC_O ,  KC_P , XXXXXXX,
-     KC_ESC  , CTL_A ,  KC_S   ,  KC_D  ,   KC_F ,   KC_G ,                                        KC_H,   KC_J ,  KC_K ,   KC_L , CTL_CL, KC_QUOT,
-     XXXXXXX , SFT_Z ,  KC_X   ,  KC_C  ,   KC_V ,   KC_B , KC_CAPS,ADJUST ,     FKEYS  , _______, KC_N,   KC_M ,KC_COMM, KC_DOT , SFT_SL, XXXXXXX,
+     KC_ESC  , KC_A  , ALT_S   , CTL_D  ,  SFT_F ,   KC_G ,                                        KC_H,  SFT_J , CTL_K ,  ALT_L ,KC_SCLN, KC_QUOT,
+     XXXXXXX , KC_Z  ,  KC_X   ,  KC_C  ,   KC_V ,   KC_B , KC_CAPS,ADJUST ,     FKEYS  , _______, KC_N,   KC_M ,KC_COMM, KC_DOT ,KC_SLSH, XXXXXXX,
                                 XXXXXXX , KC_LGUI,RALT_ENT, SFT_SPC,NAV_DEL,     SYM_BSP, CTL_SPC ,LALT_ENT,KC_RGUI, XXXXXXX
     ),
 
