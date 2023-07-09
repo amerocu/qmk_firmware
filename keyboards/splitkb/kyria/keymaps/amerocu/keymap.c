@@ -180,6 +180,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //     ),
 };
 
+const uint16_t PROGMEM combo_df[] = {KC_D, KC_F, COMBO_END};
+const uint16_t PROGMEM combo_sd[] = {KC_S, KC_D, COMBO_END};
+const uint16_t PROGMEM combo_as[] = {KC_A, KC_S, COMBO_END};
+const uint16_t PROGMEM combo_jk[] = {KC_J, KC_K, COMBO_END};
+const uint16_t PROGMEM combo_kl[] = {KC_K, KC_L, COMBO_END};
+
+combo_t key_combos[] = {
+    COMBO(combo_sd, KC_TAB),
+    COMBO(combo_df, KC_ESC),
+    COMBO(combo_jk, KC_DOUBLE_QUOTE),
+    COMBO(combo_kl, KC_QUOTE),
+};
 
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
