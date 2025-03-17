@@ -57,21 +57,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Base Layer: QWERTY
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |        |
+ * | ADJ    |   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  | F-keys |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |   A  |Alt/S |Ctlr/D|Shif/F|   G  |                              |   H  |Shif/J|Ctlr/K|Alt/L | ; :  |        |
+ * | CapsLk |   A  |Alt/S |Ctlr/D|Shif/F|   G  |                              |   H  |Shif/J|Ctlr/K|Alt/L | ; :  |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |   Z  |   X  |   C  |   V  |   B  |CapsLk| ADJ  |  |F-keys|      |   N  |   M  | ,  < | . >  | / ?  |        |
+ * |        |   Z  |   X  |   C  |   V  |   B  |      |      |  |      |      |   N  |   M  | ,  < | . >  | / ?  |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |      | LGUI | LAlt/| Space| Canc |  | Bksp | Space| LAlt/| RGUI |      |
+ *                        |      | LGUI | RAlt/| Space| Canc |  | Bksp | Space| LAlt/| RGUI |      |
  *                        |      |      | Enter| Shift| Nav  |  | Sym  | Ctrl | Enter|      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_QWERTY] = LAYOUT(
      XXXXXXX , KC_Q  ,  KC_W   ,  KC_E  ,   KC_R ,   KC_T ,                                        KC_Y,   KC_U ,  KC_I ,   KC_O ,  KC_P , XXXXXXX,
-     XXXXXXX , KC_A  , ALT_S   , CTL_D  ,  SFT_F ,   KC_G ,                                        KC_H,  SFT_J , CTL_K ,  ALT_L ,KC_SCLN, XXXXXXX,
-     XXXXXXX , KC_Z  ,  KC_X   ,  KC_C  ,   KC_V ,   KC_B , KC_CAPS,ADJUST ,     FKEYS  , _______, KC_N,   KC_M ,KC_COMM, KC_DOT ,KC_SLSH, XXXXXXX,
-                                XXXXXXX , KC_LGUI,RALT_ENT, SFT_SPC,NAV_DEL,     SYM_BSP, CTL_SPC ,LALT_ENT,KC_RGUI, XXXXXXX
+     KC_CAPS , KC_A  , ALT_S   , CTL_D  ,  SFT_F ,   KC_G ,                                        KC_H,  SFT_J , CTL_K ,  ALT_L ,KC_SCLN, XXXXXXX,
+     XXXXXXX , KC_Z  ,  KC_X   ,  KC_C  ,   KC_V ,   KC_B , _______, _______,    _______, _______, KC_N,   KC_M ,KC_COMM, KC_DOT ,KC_SLSH, XXXXXXX,
+                                 ADJUST , KC_LGUI,RALT_ENT, SFT_SPC,NAV_DEL,  SYM_BSP, CTL_SPC,LALT_ENT, KC_RGUI, FKEYS
     ),
 
 /*
@@ -80,9 +80,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-------------------------------------------.                              ,-------------------------------------------.
  * |        |      |      |      |      |      |                              | Home | PgUp | PgDn | End  | VolUp| Delete |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |  GUI |  Alt | Ctrl | Shift|      |                              |  ←   |  ↓   |   ↑  |   →  | VolDn| Insert |
+ * |        |  GUI |  Alt | Ctrl | Shift|      |                              |  ←   |  ↓   |   ↑  |   →  |VolMut| Insert |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |      |      |      |      |      |      |      |  |      |      |M Prev|M Play| Pause|M Next|VolMut| PrtSc  |
+ * |        |      |      |      |      |      |      |      |  |      |      |M Prev|M Play| Pause|M Next| VolDn| PrtSc  |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
@@ -90,8 +90,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_NAV] = LAYOUT(
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     KC_HOME, KC_PGDN, KC_PGUP , KC_END , KC_VOLU, KC_DEL,
-      XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,                                     KC_LEFT, KC_DOWN, KC_UP   , KC_RGHT, KC_VOLD, KC_INS,
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, KC_MPRV, KC_MPLY, KC_PAUSE, KC_MNXT, KC_MUTE, KC_PSCR,
+      XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,                                     KC_LEFT, KC_DOWN, KC_UP   , KC_RGHT, KC_MUTE, KC_INS,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, KC_MPRV, KC_MPLY, KC_PAUSE, KC_MNXT, KC_VOLD, KC_PSCR,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______ , _______
     ),
 
@@ -120,20 +120,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Function Layer: Function keys
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * | BOOT   |  F9  | F10  | F11  | F12  |      |                              |      |      |      |      |      |        |
+ * | BOOT   |  F1  |  F2  |  F3  |  F4  |  F5  |                              |  F6  |  F7  |  F8  |  F9  | F10  |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |  F5  |  F6  |  F7  |  F8  |      |                              |      | Shift| Ctrl |  Alt |  GUI |        |
+ * |        |  F11 |  F12 |      |      |      |                              |      |      |      |      |      |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |  F1  |  F2  |  F3  |  F4  |      |      |      |  |      |      |      |      |      |      |      |        |
+ * |        |      |      |      |      |      |      |      |  |      |      |      |      |      |      |      |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_FUNCTION] = LAYOUT(
-      QK_BOOT,  KC_F9 ,  KC_F10,  KC_F11,  KC_F12, XXXXXXX,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-      XXXXXXX,  KC_F5 ,  KC_F6 ,  KC_F7 ,  KC_F8 , XXXXXXX,                                     XXXXXXX, KC_RSFT, KC_RCTL, KC_LALT, KC_RGUI, XXXXXXX,
-      XXXXXXX,  KC_F1 ,  KC_F2 ,  KC_F3 ,  KC_F4 , XXXXXXX, _______, _______, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      QK_BOOT,  KC_F1 ,  KC_F2 ,  KC_F3 ,  KC_F4 ,  KC_F5 ,                                      KC_F6 ,  KC_F7 ,  KC_F8 ,  KC_F9 , KC_F10, XXXXXXX,
+      XXXXXXX,  KC_F11,  KC_F12, XXXXXXX, XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 
@@ -143,9 +143,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-------------------------------------------.                              ,-------------------------------------------.
  * |        |      |      |QWERTY|      |      |                              |      |      |      |      |      |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |      |      |Dvorak|      |      |                              | TOG  | SAI  | HUI  | VAI  | MOD  |        |
+ * |        |      |      |      |      |      |                              | TOG  | SAI  | HUI  | VAI  | MOD  |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |      |      |Colmak|      |      |      |      |  |      |      |      | SAD  | HUD  | VAD  | RMOD |        |
+ * |        |      |      |      |      |      |      |      |  |      |      |      | SAD  | HUD  | VAD  | RMOD |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
@@ -153,7 +153,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_ADJUST] = LAYOUT(
       QK_BOOT, XXXXXXX, XXXXXXX, QWERTY , XXXXXXX, XXXXXXX,                                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                    RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI,  RGB_MOD, XXXXXXX,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                    RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI, RGB_MOD , XXXXXXX,
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,_______, _______, _______, _______, XXXXXXX, RGB_SAD, RGB_HUD, RGB_VAD, RGB_RMOD, XXXXXXX,
                                  _______, _______, _______,_______, _______, _______, _______, _______, _______, _______
     ),
