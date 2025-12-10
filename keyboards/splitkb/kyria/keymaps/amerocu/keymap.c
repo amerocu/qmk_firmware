@@ -227,7 +227,6 @@ bool oled_task_user(void) {
     if (is_keyboard_master()) {
         // clang-format off
         // Host Keyboard Layer Status
-        oled_write_P(PSTR("Layer: "), false);
         switch (get_highest_layer(layer_state|default_layer_state)) {
             case _QWERTY:
                 oled_write_P(PSTR("QWERTY\n"), false);
@@ -248,16 +247,28 @@ bool oled_task_user(void) {
                 oled_write_P(PSTR("Undefined\n"), false);
         }
 
+        oled_write_P(PSTR("\n\n\n\n\n"), false);
+
+        uint8_t mods = get_mods();
+        bool shift = mods & MOD_MASK_SHIFT;
+        bool ctrl  = mods & MOD_MASK_CTRL;
+        bool alt   = mods & MOD_MASK_ALT;
+        bool gui   = mods & MOD_MASK_GUI;
+        
+        oled_write_P(PSTR("G"), gui);oled_write_P(PSTR(" "), false);
+        oled_write_P(PSTR("A"), alt);oled_write_P(PSTR(" "), false);
+        oled_write_P(PSTR("C"), ctrl);oled_write_P(PSTR(" "), false);
+        oled_write_P(PSTR("S"), shift);oled_write_P(PSTR("\n"), false);
+
         // Write host Keyboard LED Status to OLEDs
         led_t led_usb_state = host_keyboard_led_state();
-        oled_write_P(led_usb_state.num_lock    ? PSTR("NUMLCK ") : PSTR("       "), false);
-        oled_write_P(led_usb_state.caps_lock   ? PSTR("CAPLCK ") : PSTR("       "), false);
-        oled_write_P(led_usb_state.scroll_lock ? PSTR("SCRLCK ") : PSTR("       "), false);
+        oled_write_P(PSTR("NUMLCK"), led_usb_state.num_lock);oled_write_P(PSTR(" "), false);
+        oled_write_P(PSTR("CAPLCK"), led_usb_state.caps_lock);oled_write_P(PSTR(" "), false);
+        oled_write_P(PSTR("SCRLCK"), led_usb_state.scroll_lock);oled_write_P(PSTR("\n"), false);
     } else {
-        // clang-format off
-        oled_write_P(PSTR("Second."), false);
-        // clang-format on
+        oled_write_P(PSTR("Second..."), false);
     }
+
     return false;
 }
 
