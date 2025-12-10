@@ -35,6 +35,7 @@ enum layers {
 #define SYM_BSP  LT(_SYM, KC_BSPC)
 #define NAV_DEL  LT(_NAV, KC_DEL)
 
+// Querty layer
 #define LALT_ENT MT(MOD_LALT, KC_ENT)
 #define RALT_ENT MT(MOD_RALT, KC_ENT)
 #define ALT_S    MT(MOD_LALT, KC_S)
@@ -50,6 +51,57 @@ enum layers {
 
 #define GUI_A    MT(MOD_LGUI, KC_A)
 #define GUI_SCLN MT(MOD_RGUI, KC_SCLN)
+
+// Sym layer
+#define ALT_LT   MT(MOD_LALT, KC_LT)
+#define ALT_GT   MT(MOD_RALT, KC_GT)
+
+#define CTL_LBRC MT(MOD_LCTL, KC_LBRC)
+#define CTL_RBRC MT(MOD_LCTL, KC_RBRC)
+
+#define SFT_LPRN MT(MOD_LSFT, KC_LPRN)
+#define SFT_RPRN MT(MOD_RSFT, KC_RPRN)
+
+#define GUI_TILD MT(MOD_LGUI, KC_TILD)
+#define GUI_GRV  MT(MOD_RGUI, KC_GRV)
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        // Fix small mode-tap key code handler
+        case ALT_LT:
+            if (record->tap.count && record->event.pressed) {
+                tap_code16(KC_LT); 
+                return false;
+            }
+        case ALT_GT:
+            if (record->tap.count && record->event.pressed) {
+                tap_code16(KC_GT); 
+                return false;
+            }
+        case SFT_LPRN:
+            if (record->tap.count && record->event.pressed) {
+                tap_code16(KC_LPRN); 
+                return false;
+            }
+        case SFT_RPRN:
+            if (record->tap.count && record->event.pressed) {
+                tap_code16(KC_RPRN); 
+                return false;
+            }
+        case GUI_TILD:
+            if (record->tap.count && record->event.pressed) {
+                tap_code16(KC_TILD); 
+                return false;
+            }
+        case GUI_GRV:
+            if (record->tap.count && record->event.pressed) {
+                tap_code16(KC_GRV); 
+                return false;
+            }
+            break;
+    }
+    return true;
+}
 
 // Tap Dance declarations
 enum {
@@ -93,18 +145,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
 
-#define ALT_LT   MT(MOD_LALT, KC_LT)
-#define ALT_GT   MT(MOD_RALT, KC_GT)
-
-#define CTL_LBRC MT(MOD_LCTL, KC_LBRC)
-#define CTL_RBRC MT(MOD_LCTL, KC_RBRC)
-
-#define SFT_LPRN MT(MOD_LSFT, KC_LPRN)
-#define SFT_RPRN MT(MOD_RSFT, KC_RPRN)
-
-#define GUI_TILD MT(MOD_LGUI, KC_TILD)
-#define GUI_GRV  MT(MOD_RGUI, KC_GRV)
-
 /*
  * Sym Layer: Numbers and symbols
  *
@@ -125,7 +165,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      XXXXXXX , KC_BSLS, KC_QUES, KC_PIPE, KC_MINS, KC_UNDS, _______, _______, _______, _______, KC_EQL , KC_PLUS, KC_COMM, KC_DOT , KC_SLSH, XXXXXXX,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
-    
+
 /*
  * Nav Layer: Media, navigation
  *
