@@ -1,0 +1,6 @@
+#define WIDTH 128
+#define HEIGHT 64
+
+# ifdef CONWAY_ENABLE
+#define SPLIT_TRANSACTION_IDS_USER CONWAY_SYNC
+# endif

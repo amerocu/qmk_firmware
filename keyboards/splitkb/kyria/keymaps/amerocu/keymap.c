@@ -15,6 +15,11 @@
  */
 #include QMK_KEYBOARD_H
 
+// Include Conway Game of Life functionality
+#ifdef CONWAY_ENABLE
+# include "conway.h"
+#endif
+
 #define ENABLE_COMPILE_KEYCODE
 
 enum layers {
@@ -265,29 +270,42 @@ combo_t key_combos[] = {
 
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
-        // clang-format off
+        conway_render();
+        oled_set_cursor(0,0);
+
+        char * format = "";
         // Host Keyboard Layer Status
         switch (get_highest_layer(layer_state|default_layer_state)) {
             case _QWERTY:
-                oled_write_P(PSTR("QWERTY\n"), false);
+                format = "QWERTY";
                 break;
             case _NAV:
-                oled_write_P(PSTR("Nav\n"), false);
+                format = "Nav";
                 break;
             case _SYM:
-                oled_write_P(PSTR("Sym\n"), false);
+                format = "Sym";
                 break;
             case _FUNCTION:
-                oled_write_P(PSTR("Function\n"), false);
+                format = "Fun";
                 break;
             case _ADJUST:
-                oled_write_P(PSTR("Adjust\n"), false);
+                format = "Adj";
                 break;
             default:
-                oled_write_P(PSTR("Undefined\n"), false);
+                format = "Unknow";
         }
 
-        oled_write_P(PSTR("\n\n\n\n\n"), false);
+        oled_write(format, false);
+
+        unsigned long gen = conway_generation();
+        int len = snprintf(NULL, 0, "%lu", gen);
+        oled_set_cursor(21-len,0);
+
+        char buf[21];
+        snprintf(buf, sizeof(buf), "%lu", gen);
+        oled_write(buf, false);
+
+        oled_set_cursor(0, 7);
 
         uint8_t mods = get_mods();
         bool shift = mods & MOD_MASK_SHIFT;
@@ -298,15 +316,25 @@ bool oled_task_user(void) {
         oled_write_P(PSTR("G"), gui);oled_write_P(PSTR(" "), false);
         oled_write_P(PSTR("A"), alt);oled_write_P(PSTR(" "), false);
         oled_write_P(PSTR("C"), ctrl);oled_write_P(PSTR(" "), false);
-        oled_write_P(PSTR("S"), shift);oled_write_P(PSTR("\n"), false);
+        oled_write_P(PSTR("S"), shift);oled_write_P(PSTR(" "), false);
 
-        // Write host Keyboard LED Status to OLEDs
+        // // Write host Keyboard LED Status to OLEDs
         led_t led_usb_state = host_keyboard_led_state();
-        oled_write_P(PSTR("NUMLCK"), led_usb_state.num_lock);oled_write_P(PSTR(" "), false);
-        oled_write_P(PSTR("CAPLCK"), led_usb_state.caps_lock);oled_write_P(PSTR(" "), false);
-        oled_write_P(PSTR("SCRLCK"), led_usb_state.scroll_lock);oled_write_P(PSTR("\n"), false);
+        oled_write_P(PSTR("NUM"), led_usb_state.num_lock);oled_write_P(PSTR(" "), false);
+        oled_write_P(PSTR("CAPS"), led_usb_state.caps_lock);oled_write_P(PSTR(" "), false);
+        oled_write_P(PSTR("SLCK"), led_usb_state.scroll_lock);
+
     } else {
-        oled_write_P(PSTR("Second..."), false);
+        conway_render();
+        oled_set_cursor(0,0);
+
+        unsigned long gen = conway_generation();
+        int len = snprintf(NULL, 0, "%lu", gen);
+        oled_set_cursor(21-len,0);
+
+        char buf[21];
+        snprintf(buf, sizeof(buf), "%lu", gen);
+        oled_write(buf, false);
     }
 
     return false;
